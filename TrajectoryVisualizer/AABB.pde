@@ -1,3 +1,4 @@
+//AABB imported from DAGD 255 assignments with minor tweaks to game object - credit to Vaarun Singireddy
 public class AABB extends GameObject {
 
   // AABB Properties
@@ -12,8 +13,7 @@ public class AABB extends GameObject {
     // constructor code
   }
 
-  @Override public void update(float dt) {
-    super.update(dt);
+  public void update(float dt) {
     calcEdges();
   }
 
@@ -129,10 +129,5 @@ public class GameObject {
     
     public GameObject() {
       
-    }
-    
-    public void update(float dt) {
-      x += velocity.x * dt;
-      y += velocity.y * dt;
     }
   }
