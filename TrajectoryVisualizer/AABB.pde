@@ -130,4 +130,9 @@ public class GameObject {
     public GameObject() {
       
     }
+    public void update(float dt) {
+      x += velocity.x * dt;
+      y += velocity.y * dt;
+    }
+    
   }
