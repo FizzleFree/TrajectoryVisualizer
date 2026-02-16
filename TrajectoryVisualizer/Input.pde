@@ -44,8 +44,8 @@ class MouseObject extends AABB {
   PImage cursorImg;
   
   MouseObject() {
-    this.x = mouseX - 5;
-    this.y = mouseY - 5;
+    this.x = mouseX;
+    this.y = mouseY;
     setSize(15, 15);
     cursorImg = loadImage("Cursor.png");
  
@@ -53,8 +53,8 @@ class MouseObject extends AABB {
   
   void update() {
     super.update(dt);
-    this.x = mouseX - 5;
-    this.y = mouseY - 5;
+    this.x = mouseX;
+    this.y = mouseY;
   }
   
   void draw() {

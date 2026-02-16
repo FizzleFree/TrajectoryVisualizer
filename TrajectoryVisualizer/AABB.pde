@@ -13,7 +13,8 @@ public class AABB extends GameObject {
     // constructor code
   }
 
-  public void update(float dt) {
+  @Override public void update(float dt) {
+    super.update(dt);
     calcEdges();
   }
 

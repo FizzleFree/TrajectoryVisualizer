@@ -1,6 +1,6 @@
 class Projectile extends AABB {
   
-  float gravityForce = -9.8;
+  float gravityForce;
   float initialHeight;
   float launchVelocity;
   float launchTimer = 0;
@@ -9,25 +9,66 @@ class Projectile extends AABB {
   float launchAngle;
   float distanceTraveled;
   float maxHeight;
+  FloatList prevxPositions;
+  FloatList prevyPositions;
   
   
-  Projectile(float initHeight, float launchSpeed, float gravity, float angle) {
+  Projectile(PVector initLocation, float initHeight, float launchSpeed, float gravity, float angle) {
     initialHeight = initHeight;
     launchVelocity = launchSpeed;
     launchAngle = angle;
     gravityForce = gravity;
+    this.x = initLocation.x;
+    this.y = initLocation.y - initHeight;
+    setSize(50, 50);
+    prevxPositions = new FloatList();
+    prevyPositions = new FloatList();
     
+  }
+  
+  void update() {
+    launchTimer += dt;
+    prevxPositions.append(x);
+    prevyPositions.append(y);
+    
+    x += calcHorizVelocity();
+    y += calcVertVelocity();
+    
+    println(sqrt(sq(calcHorizVelocity()) + sq(calcVertVelocity())));
+  }
+  
+  void draw() {
+    fill(255, 0, 0);
+    ellipse(x, y, 50, 50);
+    
+    
+    for (int i = 0; i < prevxPositions.size(); i++) {
+      strokeWeight(5);
+      stroke(255, 0, 0);
+      if (prevxPositions.size() - 1 == i) {
+        line(prevxPositions.get(i), prevyPositions.get(i), x, y);
+      } else {
+        line(prevxPositions.get(i), prevyPositions.get(i), prevxPositions.get(i + 1), prevyPositions.get(i+1));
+      }
+      
+    }
     
   }
   
   
-  
-  
   float calcHorizVelocity() {
-    float velocityOutput = 0;
+    float velocityOutput;
+    velocityOutput = cos(launchAngle) * launchVelocity * launchTimer;
+    return velocityOutput;
+  }
+  
+  float calcVertVelocity() {
+    float velocityOutput;
+    //positionOutput = initialHeight - (this.x * tan(launchAngle)) + gravityForce * (sq(x)/2*sq(launchVelocity) * sq(cos(launchAngle)));
     
+    velocityOutput = -initialHeight - (sin(launchAngle) * launchVelocity) * launchTimer + ((gravityForce * launchTimer * launchTimer)/2);
     
-    
+    //println(velocityOutput);
     return velocityOutput;
   }
   

@@ -42,9 +42,22 @@ void draw() {
     if(sceneExperiment != null) sceneExperiment.draw();
   }
   
-  Mouse.update();
+  mouseO.update();
   mouseO.draw();
+  
+  Mouse.update();
 }
+
+
+//----------------Mouse-------------------
+void mousePressed() {
+  Mouse.handleKeyDown(mouseButton);
+}
+
+void mouseReleased() {
+  Mouse.handleKeyUp(mouseButton);
+}
+
 
 
 //----------------SCENES------------------
