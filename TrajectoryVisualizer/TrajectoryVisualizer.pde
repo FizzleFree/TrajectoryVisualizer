@@ -12,6 +12,14 @@ MouseObject mouseO;
 
 
 float dt, prevTime = 0;
+static float gravitationalConstant = 6.6742 * (pow(10, -11));
+static float earthRadius = 6371000;
+static float earthMassKg = 5.9722 * (pow(10, 24));
+float planetRadius = earthRadius;
+float planetMassKg = earthMassKg;
+float objectMassKg = 1;
+
+
 
 
 void setup() {
@@ -24,6 +32,7 @@ void setup() {
 
 void draw() {
   calcDeltaTime();
+  calcGravityForce();
   background(128);
   noStroke();
   noCursor();
@@ -83,4 +92,13 @@ void calcDeltaTime() {
   float currTime = millis();
   dt = (currTime - prevTime) / 1000.0;
   prevTime = currTime;
+}
+
+//------------------GRAVITYFORCE-----------
+
+float calcGravityForce() {
+    float gravityForce = 0;
+    gravityForce = gravitationalConstant * objectMassKg * planetMassKg;
+    gravityForce /= (planetRadius * planetRadius);
+    return gravityForce;
 }

@@ -11,6 +11,7 @@ class Projectile extends AABB {
   float maxHeight;
   FloatList prevxPositions;
   FloatList prevyPositions;
+  boolean isStopped = false;
   
   
   Projectile(PVector initLocation, float initHeight, float launchSpeed, float gravity, float angle) {
@@ -23,6 +24,8 @@ class Projectile extends AABB {
     setSize(50, 50);
     prevxPositions = new FloatList();
     prevyPositions = new FloatList();
+    velocity.y = sin(launchAngle) * launchVelocity;
+    velocity.x = cos(launchAngle) * launchVelocity;
     
   }
   
@@ -31,10 +34,16 @@ class Projectile extends AABB {
     prevxPositions.append(x);
     prevyPositions.append(y);
     
-    x += calcHorizVelocity();
-    y += calcVertVelocity();
+    if (!isStopped) {
+      velocity.x += calcHorizVelocity();
+      velocity.y += calcVertVelocity();
+    } else {
+      velocity = new PVector(0, 0);
+    }
     
-    println(sqrt(sq(calcHorizVelocity()) + sq(calcVertVelocity())));
+    //println(sqrt(sq(calcHorizVelocity()) + sq(calcVertVelocity())));
+    
+    super.update(dt);
   }
   
   void draw() {
@@ -58,17 +67,18 @@ class Projectile extends AABB {
   
   float calcHorizVelocity() {
     float velocityOutput;
-    velocityOutput = cos(launchAngle) * launchVelocity * launchTimer;
+    velocityOutput = cos(launchAngle) * launchVelocity * dt;
     return velocityOutput;
   }
   
   float calcVertVelocity() {
     float velocityOutput;
+    //I was wayyy overthinking this trying to follow some of the math for predicting it instead of the math that *does* it lmao
     //positionOutput = initialHeight - (this.x * tan(launchAngle)) + gravityForce * (sq(x)/2*sq(launchVelocity) * sq(cos(launchAngle)));
+    //velocityOutput = -initialHeight - (sin(launchAngle) * launchVelocity) * launchTimer + ((gravityForce * launchTimer * launchTimer)/2);
     
-    velocityOutput = -initialHeight - (sin(launchAngle) * launchVelocity) * launchTimer + ((gravityForce * launchTimer * launchTimer)/2);
+    velocityOutput = gravityForce * dt;
     
-    //println(velocityOutput);
     return velocityOutput;
   }
   
