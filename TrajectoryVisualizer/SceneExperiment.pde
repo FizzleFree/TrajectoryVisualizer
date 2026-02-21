@@ -7,8 +7,9 @@ class SceneExperiment {
   /*
    Array Locations
    launchSpeed = 0
-   
-   
+   launchAngle = 1
+   launchHeight = 2
+   ObjectMass = 3
    
    
   */
@@ -79,7 +80,7 @@ class SceneExperiment {
       }
     }
     if (currentProjectile != null) {
-      if (currentProjectile.checkOverlap(floor) && currentProjectile.launchTimer > 0.5) {
+      if (currentProjectile.checkOverlap(floor)) {
         currentProjectile.isStopped = true;
       }
     }
