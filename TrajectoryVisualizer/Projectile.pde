@@ -47,6 +47,8 @@ class Projectile extends AABB {
   }
   
   void draw() {
+    noStroke();
+    ellipseMode(CENTER);
     fill(255, 0, 0);
     ellipse(x, y, 50, 50);
     

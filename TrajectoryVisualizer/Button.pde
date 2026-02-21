@@ -23,6 +23,7 @@ class Button extends AABB {
   
   void draw() {
     
+    noStroke();
     rectMode(CENTER);
     if (highlighted) {
       fill(0, 255, 255);

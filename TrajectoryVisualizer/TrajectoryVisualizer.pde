@@ -32,7 +32,6 @@ void setup() {
 
 void draw() {
   calcDeltaTime();
-  calcGravityForce();
   background(128);
   noStroke();
   noCursor();
@@ -96,8 +95,9 @@ void calcDeltaTime() {
 
 //------------------GRAVITYFORCE-----------
 
-float calcGravityForce() {
+float calcGravityForce(float objectMass) {
     float gravityForce = 0;
+    objectMassKg = objectMass;
     gravityForce = gravitationalConstant * objectMassKg * planetMassKg;
     gravityForce /= (planetRadius * planetRadius);
     return gravityForce;
