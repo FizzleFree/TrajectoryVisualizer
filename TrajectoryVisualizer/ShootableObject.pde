@@ -3,6 +3,7 @@ class ShootableObject extends AABB {
   boolean isATarget = false;
   float objectWidth, objectHeight;
   color objectColor;
+  boolean wasHit = false;
   
   ShootableObject(PVector initLocation, float initWidth, float initHeight, boolean isTarget, color initColor) {
     this.x = initLocation.x;
@@ -17,6 +18,8 @@ class ShootableObject extends AABB {
   
   void update() {
     super.update(dt);
+    
+    
     
   }
   

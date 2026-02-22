@@ -78,10 +78,35 @@ class SceneLearn {
     noStroke();
     textAlign(LEFT);
     textSize(30);
-    text("Page: " + pageNumber + " / " + totalPages, width - 150, height - 150);
+    text("Page: " + (pageNumber + 1) + " / " + (totalPages + 1), width - 150, height - 150);
+    
+    
+    //----------------------------------------PAGE TEXT---------------------------------------------
+    fill(0);
+    noStroke();
+    textAlign(CENTER);
+    textSize(25);
+    if (pageNumber == 0) {
+      text("ExampleTextPage1", width/6, height/4);
+    } else if (pageNumber == 1) {
+      text("ExampleTextPage2", width/6, height/4);
+    } else if (pageNumber == 2) {
+      text("ExampleTextPage3", width/6, height/4);
+    } else if (pageNumber == 3) {
+      text("ExampleTextPage4", width/6, height/4);
+    } else if (pageNumber == 4) {
+      text("ExampleTextPage5", width/6, height/4);
+    } else if (pageNumber == 5) {
+      text("ExampleTextPage6", width/6, height/4);
+    }
+    
+    //-----------------------------------------Animation Playing-------------------------------------
     
     
     
+    
+    
+    //-----------------------------------------Button Drawing-------------------------------------------
     if (pageNumber < totalPages) {
       nextButton.draw();
     }

@@ -10,15 +10,17 @@ class SceneExperiment {
    launchAngle = 1
    launchHeight = 2
    ObjectMass = 3
-   
-   
   */
   
+  boolean[] achievements = {false, false, false, false};
+  ShootableObject[] targets = new ShootableObject[3];
   
   
   Projectile currentProjectile;
   ShootableObject floor;
-  ShootableObject target;
+  
+  
+  
   float launchHeight = 0;
   float launchSpeed = 1500;
   float currentGravityForce = 981;
@@ -26,6 +28,8 @@ class SceneExperiment {
   PVector launchLocation = new PVector(width/10, height - 200);
   PVector floorLocation = new PVector(width/2, height - 75);
   PVector targetOneLocation = new PVector (width/2, height - 150);
+  PVector targetTwoLocation = new PVector (width/1.5, height - 150);
+  PVector targetThreeLocation = new PVector (width - 100, height - 150);
   
   SceneExperiment() {
     exitButton = new Button(70, 70, 100, 100, "Exit");
@@ -37,8 +41,9 @@ class SceneExperiment {
     sliders.add(new Slider(1100, 70, 25, 75, 200, 3, "Object Mass", false)); //Object Mass
     
     floor = new ShootableObject(floorLocation, width, 150, false, color(0, 255, 0));
-    target = new ShootableObject(targetOneLocation, 100, 25, true, color(255, 0, 0));
-    
+    targets[0] = new ShootableObject(targetOneLocation, 100, 25, true, color(255, 0, 0));
+    targets[1] = new ShootableObject(targetTwoLocation, 100, 25, true, color(255, 0, 0));
+    targets[2] = new ShootableObject(targetThreeLocation, 100, 25, true, color(255, 0, 0));
     
   }
   
@@ -52,7 +57,6 @@ class SceneExperiment {
     }
     
     floor.update();
-    target.update();
     if (currentProjectile != null) {
       currentProjectile.update();
     }
@@ -83,6 +87,18 @@ class SceneExperiment {
       if (currentProjectile.checkOverlap(floor)) {
         currentProjectile.isStopped = true;
       }
+      for (ShootableObject t : targets) {
+        if (currentProjectile.checkOverlap(t)) {
+          currentProjectile.isStopped = true;
+          achievements[0] = true;
+          t.wasHit = true;
+        }
+      }
+      
+      
+      
+      
+      
     }
     
     for (Slider s : sliders) {
@@ -102,7 +118,11 @@ class SceneExperiment {
   void draw() {
     
     floor.draw();
-    target.draw();
+    
+    for (ShootableObject t : targets) {
+      t.draw();
+    }
+    
     
     strokeWeight(4);
     stroke(0);
@@ -113,6 +133,20 @@ class SceneExperiment {
     }
     
     //-------------------------HUD DRAW-------------------------
+    noStroke();
+    rectMode(CENTER);
+    if (achievements[0] == true) {
+      fill(255, 255, 0);
+    } else {
+      fill(0);
+    }
+    rect(35, 150, 25, 25, 5);
+    textAlign(CENTER);
+    textSize(20);
+    fill(0);
+    text("Hit a Target", 100, 160);
+    
+    
     exitButton.draw();
     launchButton.draw();
     
