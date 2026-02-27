@@ -32,7 +32,7 @@ void setup() {
 
 void draw() {
   calcDeltaTime();
-  background(128);
+  background(42);
   noStroke();
   noCursor();
   

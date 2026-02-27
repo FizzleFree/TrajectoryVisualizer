@@ -81,23 +81,83 @@ class SceneLearn {
     text("Page: " + (pageNumber + 1) + " / " + (totalPages + 1), width - 150, height - 150);
     
     
-    //----------------------------------------PAGE TEXT---------------------------------------------
-    fill(0);
-    noStroke();
-    textAlign(CENTER);
-    textSize(25);
-    if (pageNumber == 0) {
-      text("ExampleTextPage1", width/6, height/4);
-    } else if (pageNumber == 1) {
-      text("ExampleTextPage2", width/6, height/4);
-    } else if (pageNumber == 2) {
-      text("ExampleTextPage3", width/6, height/4);
-    } else if (pageNumber == 3) {
-      text("ExampleTextPage4", width/6, height/4);
-    } else if (pageNumber == 4) {
-      text("ExampleTextPage5", width/6, height/4);
-    } else if (pageNumber == 5) {
-      text("ExampleTextPage6", width/6, height/4);
+    //-------------------------------------------------------------------------------------------------------------------
+    //                                                  PAGE TEXT                                                       |
+    //-------------------------------------------------------------------------------------------------------------------
+    
+    ToTitleText();
+    
+    if (pageNumber == 0) { //-------------------------------PAGE 1---------------------
+    
+      //--------Title Text-----------
+        text("What is Trajectory?", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("ExampleTextPage1", width/6, height/4);
+      
+    } else if (pageNumber == 1) { //-------------------------------PAGE 2---------------------
+    
+      //--------Title Text-----------
+        ToTitleText();
+        text("Forces of Trajectory: Initial Velocity", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("ExampleTextPage2", width/6, height/4);
+      
+    } else if (pageNumber == 2) { //-------------------------------PAGE 3---------------------
+    
+       //--------Title Text-----------
+         ToTitleText();
+         text("Forces of Trajectory: Initial Angle", width/2, height/6);
+      
+       //----------------------Page Content-----------
+         ToBodyText();
+         text("ExampleTextPage3", width/6, height/4);
+      
+      
+      
+      
+    } else if (pageNumber == 3) { //-------------------------------PAGE 4---------------------
+    
+      //--------Title Text-----------
+        ToTitleText();
+        text("Forces of Trajectory: Initial Height", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("ExampleTextPage4", width/6, height/4);
+      
+      
+      
+      
+    } else if (pageNumber == 4) { //-------------------------------PAGE 5---------------------
+    
+      //--------Title Text-----------
+        ToTitleText();
+        text("Forces of Trajectory: Gravity", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("ExampleTextPage5", width/6, height/4);
+      
+      
+      
+      
+    } else if (pageNumber == 5) { //-------------------------------PAGE 6---------------------
+    
+      //--------Title Text-----------
+        ToTitleText();
+        text("Gravity Cont.", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("ExampleTextPage6", width/6, height/4);
+      
+      
+      
+      
     }
     
     //-----------------------------------------Animation Playing-------------------------------------
@@ -118,6 +178,19 @@ class SceneLearn {
       backButton.draw();
     }
     exitButton.draw();
+  }
+  
+  void ToTitleText() {
+      textAlign(CENTER);
+      textSize(60);
+      fill(255);
+  }
+  
+  void ToBodyText() {
+      fill(0);
+      noStroke();
+      textAlign(CENTER);
+      textSize(25);
   }
   
   
