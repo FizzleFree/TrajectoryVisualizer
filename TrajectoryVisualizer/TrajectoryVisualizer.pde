@@ -18,6 +18,7 @@ static float earthMassKg = 5.9722 * (pow(10, 24));
 float planetRadius = earthRadius;
 float planetMassKg = earthMassKg;
 float objectMassKg = 1;
+int projectileColorSelector = 0;
 
 
 
@@ -32,7 +33,7 @@ void setup() {
 
 void draw() {
   calcDeltaTime();
-  background(42);
+  background(86, 0, 180);
   noStroke();
   noCursor();
   

@@ -12,6 +12,7 @@ class Projectile extends AABB {
   FloatList prevxPositions;
   FloatList prevyPositions;
   boolean isStopped = false;
+  color projectileColor;
   
   
   Projectile(PVector initLocation, float initHeight, float launchSpeed, float gravity, float angle) {
@@ -26,6 +27,13 @@ class Projectile extends AABB {
     prevyPositions = new FloatList();
     velocity.y = sin(launchAngle) * launchVelocity;
     velocity.x = cos(launchAngle) * launchVelocity;
+    if (projectileColorSelector == 0) {
+      projectileColor = color(255, 0, 0);
+    } else if (projectileColorSelector == 1) {
+      projectileColor = color(0, 255, 0);
+    } else {
+      projectileColor = color(0, 0, 255);
+    }
     
   }
   
@@ -49,13 +57,13 @@ class Projectile extends AABB {
   void draw() {
     noStroke();
     ellipseMode(CENTER);
-    fill(255, 0, 0);
+    fill(projectileColor);
     ellipse(x, y, 50, 50);
     
     
     for (int i = 0; i < prevxPositions.size(); i++) {
       strokeWeight(5);
-      stroke(255, 0, 0);
+      stroke(projectileColor);
       if (prevxPositions.size() - 1 == i) {
         line(prevxPositions.get(i), prevyPositions.get(i), x, y);
       } else {

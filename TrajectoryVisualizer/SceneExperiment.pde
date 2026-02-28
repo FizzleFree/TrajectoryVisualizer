@@ -38,7 +38,7 @@ class SceneExperiment {
     sliders.add(new Slider(350, 70, 25, 75, 200, 1500, "Velocity", false)); //Launch Speed
     sliders.add(new Slider(600, 70, 25, 75, 200, HALF_PI, "Angle", true)); //launch Angle
     sliders.add(new Slider(850, 70, 25, 75, 200, 300, "Launch Height", false)); //Launch Height
-    sliders.add(new Slider(1100, 70, 25, 75, 200, 3, "Object Mass", false)); //Object Mass
+    sliders.add(new Slider(1100, 70, 25, 75, 200, 10, "Object Mass", false)); //Object Mass
     
     floor = new ShootableObject(floorLocation, width, 150, false, color(0, 255, 0));
     targets[0] = new ShootableObject(targetOneLocation, 100, 25, true, color(255, 0, 0));
@@ -75,10 +75,11 @@ class SceneExperiment {
       if (Mouse.onDown(Mouse.LEFT)) {
         // -----------------------------------------------Set Slider Variables and other conditions------------------------------------
         currentGravityForce = (calcGravityForce(sliders.get(3).sliderValue)) * 100;
-        currentGravityForce = (calcGravityForce(1)) * 100;
+        //currentGravityForce = (calcGravityForce(1)) * 100;
         launchSpeed = sliders.get(0).sliderValue;
         angleOfLaunch = -sliders.get(1).sliderValue;
         launchHeight = sliders.get(2).sliderValue;
+        projectileColorSelector = 0;
         
         currentProjectile = new Projectile(launchLocation, launchHeight, launchSpeed, currentGravityForce, angleOfLaunch);
       }
