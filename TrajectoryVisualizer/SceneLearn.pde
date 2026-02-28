@@ -2,10 +2,12 @@ class SceneLearn {
   
   ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
   
+  PImage trajectoryEquation;
+  
   ShootableObject lowerGraphLine;
   
   int pageNumber = 0;
-  int totalPages = 5;
+  int totalPages = 6;
   float animTimer = 0;
   float animResetPoint = 5;
   
@@ -23,8 +25,8 @@ class SceneLearn {
     backButton = new Button(width - 190, height - 70, 100, 100, "Back");
     exitButton = new Button(70, 70, 100, 100, "Exit");
     tryItButton = new Button(width - 70, height - 70, 100, 100, "Try It!!");
-    lowerGraphLine = new ShootableObject(new PVector(1046, 539), 467, 5, false, color(0));
-    
+    lowerGraphLine = new ShootableObject(new PVector(1046, 539), 467, 10, false, color(0));
+    trajectoryEquation = loadImage("trajectoryequation.png");
   }
   
   void update() {
@@ -101,6 +103,10 @@ class SceneLearn {
       }
     } else if (pageNumber == 1) {
       if (animTimer == 0) {
+        
+      }
+    } else if (pageNumber == 2) {
+      if (animTimer == 0) {
         projectiles.clear();
         projectileColorSelector = 0;
         projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 1000, 1500, -PI/2.5));
@@ -109,10 +115,29 @@ class SceneLearn {
         projectileColorSelector = 2;
         projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 500, 1500, -PI/2.5));
       }
+    } else if (pageNumber == 3) {
+      if (animTimer == 0) {
+        projectiles.clear();
+        projectileColorSelector = 0;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 750, 1500, -radians(70)));
+        projectileColorSelector = 1;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 750, 1500, -QUARTER_PI));
+        projectileColorSelector = 2;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 750, 1500, -radians(20)));
+      }
+    } else if (pageNumber == 4) {
+      if (animTimer == 0) {
+        projectiles.clear();
+        projectileColorSelector = 0;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 0, 500, 1500, -QUARTER_PI));
+        projectileColorSelector = 1;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 100, 500, 1500, -QUARTER_PI));
+        projectileColorSelector = 2;
+        projectiles.add(new Projectile(new PVector(width-width/2.75, height - height/4 - 10), 200, 500, 1500, -QUARTER_PI));
+      }
     }
     
-    
-    if (animTimer > 0.3) {
+    if (animTimer > 0.25) {
       for(Projectile p : projectiles) {
         if (p.checkOverlap(lowerGraphLine)) p.isStopped = true;
       }
@@ -157,13 +182,9 @@ class SceneLearn {
         text("impact trajectory include; Initial Velocity, Initial Launch Angle, Initial", 20, height/4 + 240);
         text("Height/Position, and Gravity, which accounts for object mass and the", 20, height/4 + 280);
         text("gravitational pull of the planet the object is being pulled towards.", 20, height/4 + 320);
-        text("To predict the horizontal velocity, the equation 'x = velocity * cos(launch angle)'", 50, height/4 + 360);
-        text("can be used. However, the equation for the vertical velocity is much more complex:", 20, height/4 + 400);
-        text("'y = initial height + x * tan(launch angle) - gravity force * (x^2/2 * velocity^2 * cos^2(launch angle))'", 20, height/4 + 440);
-        text("This equation is much more important as it is able to be inputted in a graphing calculator,", 20, height/4 + 480);
-        text("allowing you to find the length and max height of the trajectory. Let's break it down!", 20, height/4 + 520);
         
-        stroke(2);
+        
+        stroke(10);
         //line(813, 539, 1280, 539);
         line(813, 539, 813, 200);
         noStroke();
@@ -171,6 +192,26 @@ class SceneLearn {
         if (animTimer >= 1) text("This red line is the trajectory!", width - width/3.5, height/3 - 25);
         
     } else if (pageNumber == 1) { //-------------------------------PAGE 2----------------|
+    
+      //--------Title Text-----------
+        ToTitleText();
+        text("What is Trajectory? Cont.", width/2, height/6);
+      
+      //----------------------Page Content-----------
+        ToBodyText();
+        text("To predict the horizontal velocity, the equation 'x = velocity * cos(launch angle)'", width/6 + 40, height/4);
+        text("can be used. However, the equation for the vertical velocity is much more complex:", width/6, height/4 + 40);
+        text("'y = initial height + x * tan(launch angle) - gravity force * (x^2/2 * velocity^2 * cos^2(launch angle))'", width/6, height/4 + 80);
+        text("This equation is much more important as it is able to be inputted in a graphing calculator,", width/6, height/4 + 120);
+        text("allowing you to find the distance and max height of the trajectory. Let's break it down!", width/6, height/4 + 160);
+        
+        imageMode(CENTER);
+        image(trajectoryEquation, width/2, height - height/4, width/2, height/2);
+        fill(0);
+        textSize(15);
+        text("Source: omnicalculator.com", width/2 + 145, height - 5);
+        
+    } else if (pageNumber == 2) { //-------------------------------PAGE 3-----------------|
     
       //--------Title Text-----------
         ToTitleText();
@@ -189,12 +230,16 @@ class SceneLearn {
         text("find the horizontal velocity, which is a key piece of the main equation!", 20, height/4 + 320);
       
       
-        stroke(2);
+        stroke(10);
         line(813, 539, 813, 200);
         noStroke();
-    } else if (pageNumber == 2) { //-------------------------------PAGE 3-----------------|
     
-       //--------Title Text-----------
+       
+      
+      
+    } else if (pageNumber == 3) { //-------------------------------PAGE 4-----------------|
+    
+      //--------Title Text-----------
          ToTitleText();
          text("Forces of Trajectory: Initial Angle", width/2, height/6);
       
@@ -210,12 +255,14 @@ class SceneLearn {
          text("important in calculating the horizontal velocity for the rest of the equation,", 20, height/4 + 280);
          text("along with being used for a tangent and cosine aspect in the main equation itself", 20, height/4 + 320);
       
-        stroke(2);
+        stroke(10);
         line(813, 539, 813, 200);
         noStroke();
+    
       
       
-    } else if (pageNumber == 3) { //-------------------------------PAGE 4-----------------|
+      
+    } else if (pageNumber == 4) { //-------------------------------PAGE 5-----------------|
     
       //--------Title Text-----------
         ToTitleText();
@@ -230,12 +277,14 @@ class SceneLearn {
         text("the final distance traveled unless interrupted and will definitely change the max ", 20, height/4 + 160);
         text("height. On the right different max heights are used between the three balls", 20, height/4 + 200);
       
-        stroke(2);
+        stroke(10);
         line(813, 539, 813, 200);
         noStroke();
+    
       
       
-    } else if (pageNumber == 4) { //-------------------------------PAGE 5-----------------|
+      
+    } else if (pageNumber == 5) { //-------------------------------PAGE 6-----------------|
     
       //--------Title Text-----------
         ToTitleText();
@@ -255,13 +304,14 @@ class SceneLearn {
         text("On the right three differing gravitational forces are being applied on the balls,", 60, height/4 + 360);
         text("including 0.", 20, height/4 + 400);
       
-        stroke(2);
+        stroke(10);
         line(813, 539, 813, 200);
         noStroke();
-      
-      
-    } else if (pageNumber == 5) { //-------------------------------PAGE 6-----------------|
     
+      
+      
+    } else if (pageNumber == 6) { //-------------------------------PAGE 7-----------------|
+      
       //--------Title Text-----------
         ToTitleText();
         text("Gravity Cont.", width/2, height/6);
@@ -271,11 +321,13 @@ class SceneLearn {
         text("ExampleTextPage6", width/6, height/4);
       
       
-      
+        stroke(10);
+        line(813, 539, 813, 200);
+        noStroke();
       
     }
     
-    lowerGraphLine.draw();
+    if (pageNumber != 1) lowerGraphLine.draw();
     
     
     

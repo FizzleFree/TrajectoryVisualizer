@@ -22,7 +22,7 @@ class Projectile extends AABB {
     gravityForce = gravity;
     this.x = initLocation.x;
     this.y = initLocation.y - initHeight;
-    setSize(50, 50);
+    setSize(35, 35);
     prevxPositions = new FloatList();
     prevyPositions = new FloatList();
     velocity.y = sin(launchAngle) * launchVelocity;
@@ -58,7 +58,7 @@ class Projectile extends AABB {
     noStroke();
     ellipseMode(CENTER);
     fill(projectileColor);
-    ellipse(x, y, 50, 50);
+    ellipse(x, y, 35, 35);
     
     
     for (int i = 0; i < prevxPositions.size(); i++) {
