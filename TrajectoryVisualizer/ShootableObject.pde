@@ -18,9 +18,6 @@ class ShootableObject extends AABB {
   
   void update() {
     super.update(dt);
-    
-    
-    
   }
   
   void draw() {

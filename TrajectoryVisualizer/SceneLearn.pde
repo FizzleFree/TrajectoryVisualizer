@@ -315,6 +315,7 @@ class SceneLearn {
     if (pageNumber != 1 && pageNumber != 5) {
       lowerGraphLine.draw();
       stroke(10);
+      strokeWeight(10);
       line(813, 539, 813, 160);
       noStroke();
     }

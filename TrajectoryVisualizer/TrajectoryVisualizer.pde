@@ -15,13 +15,22 @@ float dt, prevTime = 0;
 static float gravitationalConstant = 6.6742 * (pow(10, -11));
 static float earthRadius = 6371000;
 static float earthMassKg = 5.9722 * (pow(10, 24));
+static float moonRadius = 1737400;
+static float moonMassKg = 7.346 * (pow(10, 22));
+static float marsRadius = 3389500;
+static float marsMassKg = 6.41693 * (pow(10, 23));
+
+
 float planetRadius = earthRadius;
 float planetMassKg = earthMassKg;
 float objectMassKg = 1;
 int projectileColorSelector = 0;
 
+boolean achievementDashboardExtended = false;
+boolean pAchievementDashboardExtended = false;
 
-
+boolean planetDashboardExtended = false;
+boolean pPlanetDashboardExtended = false;
 
 void setup() {
   size(1280, 720);
@@ -100,5 +109,6 @@ float calcGravityForce(float objectMass) {
     objectMassKg = objectMass;
     gravityForce = gravitationalConstant * objectMassKg * planetMassKg;
     gravityForce /= (planetRadius * planetRadius);
+    println(gravityForce);
     return gravityForce;
 }
