@@ -118,6 +118,8 @@ class SceneExperiment {
   
   void draw() {
     
+    background(0, 0, 255);
+    
     floor.draw();
     
     for (ShootableObject t : targets) {

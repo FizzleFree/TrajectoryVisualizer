@@ -38,6 +38,7 @@ class SceneTitle {
   }
   
   void draw() {
+    background(86, 0, 180);
     
     textAlign(CENTER);
     textSize(75);
