@@ -4,6 +4,7 @@ class ShootableObject extends AABB {
   float objectWidth, objectHeight;
   color objectColor;
   boolean wasHit = false;
+  PImage target;
   
   ShootableObject(PVector initLocation, float initWidth, float initHeight, boolean isTarget, color initColor) {
     this.x = initLocation.x;
@@ -13,7 +14,7 @@ class ShootableObject extends AABB {
     setSize(objectWidth, objectHeight);
     isATarget = isTarget;
     objectColor = initColor;
-    
+    target = loadImage("target.png");
   }
   
   void update() {
@@ -22,8 +23,13 @@ class ShootableObject extends AABB {
   
   void draw() {
     fill(objectColor);
-    rect(x, y, objectWidth, objectHeight);
     
+    
+    if (isATarget) {
+      image(target, x, y, objectWidth, objectHeight);
+    } else {
+      rect(x, y, objectWidth, objectHeight);
+    }
   }
   
   

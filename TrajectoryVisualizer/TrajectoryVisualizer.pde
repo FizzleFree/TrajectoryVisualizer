@@ -2,6 +2,8 @@
 //This is a Trajectory Visualizer Project
 
 
+import processing.sound.*;
+
 //Scenes:
 SceneTitle sceneTitle;
 SceneLearn sceneLearn;
@@ -20,6 +22,10 @@ static float moonMassKg = 7.346 * (pow(10, 22));
 static float marsRadius = 3389500;
 static float marsMassKg = 6.41693 * (pow(10, 23));
 
+SoundFile beep;
+SoundFile music;
+SoundFile woosh;
+
 
 float planetRadius = earthRadius;
 float planetMassKg = earthMassKg;
@@ -36,7 +42,10 @@ void setup() {
   size(1280, 720);
   switchToTitle();
   mouseO = new MouseObject();
-  
+  beep = new SoundFile(this, "beep.wav");
+  music = new SoundFile(this, "lofi.wav");
+  woosh = new SoundFile(this, "woosh.wav");
+  music.loop();
 }
 
 
@@ -44,6 +53,7 @@ void draw() {
   calcDeltaTime();
   noStroke();
   noCursor();
+  
   
   
   if(sceneTitle != null) {

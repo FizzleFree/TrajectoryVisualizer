@@ -25,6 +25,7 @@ class SceneExperiment {
 
   Projectile currentProjectile;
   ShootableObject floor;
+  ShootableObject wall;
 
 
 
@@ -59,6 +60,7 @@ class SceneExperiment {
     sliders.add(new Slider(1100, 70, 25, 75, 200, 10, "Object Mass", false)); //Object Mass
 
     floor = new ShootableObject(floorLocation, width, 150, false, color(0, 255, 0));
+    wall = new ShootableObject(new PVector(width/2 - 75, height - 200), 50, 100, false, color(128));
     targets[0] = new ShootableObject(targetOneLocation, 100, 25, true, color(255, 0, 0));
     targets[1] = new ShootableObject(targetTwoLocation, 100, 25, true, color(255, 0, 0));
     targets[2] = new ShootableObject(targetThreeLocation, 100, 25, true, color(255, 0, 0));
@@ -89,6 +91,7 @@ class SceneExperiment {
     if (exitButton.checkOverlap(mouseO)) {
       exitButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         switchToTitle();
       }
     }
@@ -102,6 +105,7 @@ class SceneExperiment {
         angleOfLaunch = -sliders.get(1).sliderValue;
         launchHeight = sliders.get(2).sliderValue;
         projectileColorSelector = 0;
+        woosh.play();
 
         currentProjectile = new Projectile(launchLocation, launchHeight, launchSpeed, currentGravityForce, angleOfLaunch);
       }
@@ -110,11 +114,23 @@ class SceneExperiment {
       if (currentProjectile.checkOverlap(floor)) {
         currentProjectile.isStopped = true;
       }
+      if (currentProjectile.checkOverlap(wall)) {
+        currentProjectile.isStopped = true;
+      }
       for (ShootableObject t : targets) {
         if (currentProjectile.checkOverlap(t)) {
           currentProjectile.isStopped = true;
           achievements[0] = true;
           t.wasHit = true;
+          if (angleOfLaunch >= -0.01) {
+            achievements[3] = true;
+          }
+          if (sliders.get(3).sliderValue >= 9.98) {
+            achievements[1] = true;
+          }
+          if (planetRadius == moonRadius) {
+            achievements[2] = true;
+          }
         }
       }
     }
@@ -169,8 +185,12 @@ class SceneExperiment {
   void draw() {
 
     background(0, 0, 255);
+    
+    fill(128);
+    rect(launchLocation.x, launchLocation.y - sliders.get(2).sliderValue + 250, 50, 500); 
 
     floor.draw();
+    wall.draw();
 
     for (ShootableObject t : targets) {
       t.draw();
@@ -178,7 +198,7 @@ class SceneExperiment {
 
 
     strokeWeight(4);
-    stroke(0);
+    stroke(200);
     line(launchLocation.x, launchLocation.y - sliders.get(2).sliderValue, 100 * cos(-sliders.get(1).sliderValue) + launchLocation.x, 100 * sin(-sliders.get(1).sliderValue) + launchLocation.y - sliders.get(2).sliderValue);
 
     if (currentProjectile != null) {
@@ -209,10 +229,51 @@ class SceneExperiment {
       fill(0);
     }
     rect(achievementBoard.x - 75, achievementBoard.y - 125, 25, 25, 5);
-    textAlign(CENTER);
+    textAlign(LEFT);
     textSize(20);
     fill(0);
-    text("Hit a Target", achievementBoard.x, achievementBoard.y - 120);
+    text("Hit a Target", achievementBoard.x - 50, achievementBoard.y - 120);
+    
+    noStroke();
+    rectMode(CENTER);
+    if (achievements[1] == true) {
+      fill(255, 255, 0);
+    } else {
+      fill(0);
+    }
+    rect(achievementBoard.x - 75, achievementBoard.y - 65, 25, 25, 5);
+    textAlign(LEFT);
+    textSize(20);
+    fill(0);
+    text("Hit a Target with max mass", achievementBoard.x - 50, achievementBoard.y - 60);
+    
+    noStroke();
+    rectMode(CENTER);
+    if (achievements[2] == true) {
+      fill(255, 255, 0);
+    } else {
+      fill(0);
+    }
+    rect(achievementBoard.x - 75, achievementBoard.y - 5, 25, 25, 5);
+    textAlign(LEFT);
+    textSize(20);
+    fill(0);
+    text("Hit a Target on the moon", achievementBoard.x - 50, achievementBoard.y);
+    
+    noStroke();
+    rectMode(CENTER);
+    if (achievements[3] == true) {
+      fill(255, 255, 0);
+    } else {
+      fill(0);
+    }
+    rect(achievementBoard.x - 75, achievementBoard.y + 60, 25, 25, 5);
+    textAlign(LEFT);
+    textSize(20);
+    fill(0);
+    text("Hit a Target with an angle of 0", achievementBoard.x - 50, achievementBoard.y + 65);
+    
+    
 
     //Planet Board-----------------------------------------------------
     planetBoard.draw();

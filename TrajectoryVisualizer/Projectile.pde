@@ -31,8 +31,16 @@ class Projectile extends AABB {
       projectileColor = color(255, 0, 0);
     } else if (projectileColorSelector == 1) {
       projectileColor = color(0, 255, 0);
-    } else {
+    } else if (projectileColorSelector == 2) {
       projectileColor = color(0, 0, 255);
+    } else if (projectileColorSelector == 3) {
+      projectileColor = color(255, 0, 255);
+    } else if (projectileColorSelector == 4) {
+      projectileColor = color(255, 255, 0);
+    } else if (projectileColorSelector == 5) {
+      projectileColor = color(0, 255, 255);
+    } else if (projectileColorSelector == 6) {
+      projectileColor = color(128, 128, 128);
     }
     
   }

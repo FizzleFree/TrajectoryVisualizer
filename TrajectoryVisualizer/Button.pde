@@ -4,6 +4,7 @@ class Button extends AABB {
   float buttonWidth;
   float buttonHeight;
   boolean highlighted = false;
+  PImage target;
   
   Button(float initX, float initY, float initW, float initH, String initButtonText) {
     this.x = initX;
@@ -12,6 +13,7 @@ class Button extends AABB {
     buttonWidth = initW;
     buttonHeight = initH;
     buttonText = initButtonText;
+    
     
   }
   
@@ -31,6 +33,8 @@ class Button extends AABB {
       fill(0, 128, 255);
     }
     rect(x, y, buttonWidth, buttonHeight);
+    
+    
     
     textAlign(CENTER);
     textSize(30);

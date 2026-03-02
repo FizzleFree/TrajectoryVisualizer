@@ -46,7 +46,7 @@ class MouseObject extends AABB {
   MouseObject() {
     this.x = mouseX;
     this.y = mouseY;
-    setSize(15, 15);
+    setSize(25, 25);
     cursorImg = loadImage("Cursor.png");
  
   }
@@ -59,7 +59,7 @@ class MouseObject extends AABB {
   
   void draw() {
     imageMode(CENTER);
-    image(cursorImg, x, y, 15, 15);
+    image(cursorImg, x, y, 25, 25);
     
   }
   

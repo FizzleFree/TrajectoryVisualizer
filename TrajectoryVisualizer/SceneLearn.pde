@@ -74,22 +74,26 @@ class SceneLearn {
         buttonClicked = true;
         animTimer = 0;
         projectiles.clear();
+        beep.play();
       }
     }
 
     if (tryItButton.checkOverlap(mouseO) && pageNumber == totalPages && !buttonClicked) {
       tryItButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         switchToExperiment();
         buttonClicked = true;
         animTimer = 0;
         projectiles.clear();
+        
       }
     }
 
     if (backButton.checkOverlap(mouseO) && pageNumber > 0 && !buttonClicked) {
       backButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         pageNumber--;
         buttonClicked = true;
         animTimer = 0;
@@ -99,6 +103,7 @@ class SceneLearn {
     if (exitButton.checkOverlap(mouseO) && !buttonClicked) {
       exitButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         switchToTitle();
         buttonClicked = true;
         animTimer = 0;
@@ -108,6 +113,7 @@ class SceneLearn {
     if (playAnimButton.checkOverlap(mouseO) && !buttonClicked) {
       playAnimButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         buttonClicked = true;
         animTimer = 0;
         if (pageNumber == 0) {
@@ -128,6 +134,7 @@ class SceneLearn {
     if (autoPlayButton.checkOverlap(mouseO) && !buttonClicked) {
       autoPlayButton.highlighted = true;
       if (Mouse.onDown(Mouse.LEFT)) {
+        beep.play();
         if (autoAnimate) {
           autoAnimate = false;
         } else {
