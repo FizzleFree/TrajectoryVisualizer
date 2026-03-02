@@ -171,6 +171,7 @@ class SceneExperiment {
       if (Mouse.onDown(Mouse.LEFT)) {
         planetRadius = earthRadius;
         planetMassKg = earthMassKg;
+        currentProjectile = null;
       }
     }
     if (moonButton.checkOverlap(mouseO)) {
@@ -178,6 +179,7 @@ class SceneExperiment {
       if (Mouse.onDown(Mouse.LEFT)) {
         planetRadius = moonRadius;
         planetMassKg = moonMassKg;
+        currentProjectile = null;
       }
     }
     if (marsButton.checkOverlap(mouseO)) {
@@ -185,6 +187,7 @@ class SceneExperiment {
       if (Mouse.onDown(Mouse.LEFT)) {
         planetRadius = marsRadius;
         planetMassKg = marsMassKg;
+        currentProjectile = null;
       }
     }
 
