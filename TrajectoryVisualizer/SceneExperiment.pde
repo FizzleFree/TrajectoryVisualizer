@@ -7,6 +7,15 @@ class SceneExperiment {
   Button marsButton;
   ExtendableDashboards achievementBoard;
   ExtendableDashboards planetBoard;
+  
+  PImage skyBox;
+  PImage floorImg;
+  
+  PImage moonSky;
+  PImage moonFloor;
+  
+  PImage marsSky;
+  PImage marsFloor;
 
   ArrayList<Slider> sliders = new ArrayList<Slider>();
   /*
@@ -40,6 +49,15 @@ class SceneExperiment {
   PVector targetThreeLocation = new PVector (width - 100, height - 150);
 
   SceneExperiment() {
+    skyBox = loadImage("skybox.png");
+    floorImg = loadImage("floor.png");
+    
+    moonSky = loadImage("moonskybox.png");
+    moonFloor = loadImage("moonfloor.png");
+    
+    marsSky = loadImage("marsskybox.png");
+    marsFloor = loadImage("marsfloor.png");
+    
     exitButton = new Button(70, 70, 100, 100, "Exit");
     launchButton = new Button(100, height - 45, 150, 50, "LAUNCH!!");
 
@@ -186,10 +204,29 @@ class SceneExperiment {
 
     background(0, 0, 255);
     
+    imageMode(CENTER);
+    if (planetRadius == earthRadius) {
+      image(skyBox, width/2, height/2, 1280, 720);
+    } else if (planetRadius == moonRadius) {
+      image(moonSky, width/2, height/2, 1280, 720);
+    } else {
+      image(marsSky, width/2, height/2, 1280, 720);
+    }
+    
     fill(128);
     rect(launchLocation.x, launchLocation.y - sliders.get(2).sliderValue + 250, 50, 500); 
 
     floor.draw();
+    image(floorImg, floor.x, floor.y, 1280, 150);
+    
+    if (planetRadius == earthRadius) {
+      image(floorImg, floor.x, floor.y, 1280, 150);
+    } else if (planetRadius == moonRadius) {
+      image(moonFloor, floor.x, floor.y, 1280, 150);
+    } else {
+      image(marsFloor, floor.x, floor.y, 1280, 150);
+    }
+    
     wall.draw();
 
     for (ShootableObject t : targets) {
@@ -221,12 +258,12 @@ class SceneExperiment {
     fill(255);
     text("Achievements!", achievementBoard.x, achievementBoard.y - 150);
 
-    noStroke();
+    stroke(0);
     rectMode(CENTER);
     if (achievements[0] == true) {
       fill(255, 255, 0);
     } else {
-      fill(0);
+      fill(0, 128, 255);
     }
     rect(achievementBoard.x - 75, achievementBoard.y - 125, 25, 25, 5);
     textAlign(LEFT);
@@ -234,12 +271,12 @@ class SceneExperiment {
     fill(0);
     text("Hit a Target", achievementBoard.x - 50, achievementBoard.y - 120);
     
-    noStroke();
+    stroke(0);
     rectMode(CENTER);
     if (achievements[1] == true) {
       fill(255, 255, 0);
     } else {
-      fill(0);
+      fill(0, 128, 255);
     }
     rect(achievementBoard.x - 75, achievementBoard.y - 65, 25, 25, 5);
     textAlign(LEFT);
@@ -247,12 +284,12 @@ class SceneExperiment {
     fill(0);
     text("Hit a Target with max mass", achievementBoard.x - 50, achievementBoard.y - 60);
     
-    noStroke();
+    stroke(0);
     rectMode(CENTER);
     if (achievements[2] == true) {
       fill(255, 255, 0);
     } else {
-      fill(0);
+      fill(0, 128, 255);
     }
     rect(achievementBoard.x - 75, achievementBoard.y - 5, 25, 25, 5);
     textAlign(LEFT);
@@ -260,12 +297,12 @@ class SceneExperiment {
     fill(0);
     text("Hit a Target on the moon", achievementBoard.x - 50, achievementBoard.y);
     
-    noStroke();
+    stroke(0);
     rectMode(CENTER);
     if (achievements[3] == true) {
       fill(255, 255, 0);
     } else {
-      fill(0);
+      fill(0, 128, 255);
     }
     rect(achievementBoard.x - 75, achievementBoard.y + 60, 25, 25, 5);
     textAlign(LEFT);

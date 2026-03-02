@@ -1,4 +1,5 @@
 //Copyright Rylynn Hautala 2026
+//SFX and Music by Danny Pellerito
 //This is a Trajectory Visualizer Project
 
 
@@ -119,6 +120,5 @@ float calcGravityForce(float objectMass) {
     objectMassKg = objectMass;
     gravityForce = gravitationalConstant * objectMassKg * planetMassKg;
     gravityForce /= (planetRadius * planetRadius);
-    println(gravityForce);
     return gravityForce;
 }

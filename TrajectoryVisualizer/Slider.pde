@@ -50,8 +50,11 @@ class Slider extends AABB {
   
   void draw() {
     
-    
-    stroke(0);
+    if (planetRadius == moonRadius) {
+      stroke(255);
+    } else {
+      stroke(0);
+    }
     strokeWeight(3);
     line(centerX - sliderLineWidth/2, this.y, centerX + sliderLineWidth/2, this.y);
     
